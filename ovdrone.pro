@@ -3,15 +3,20 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
+QMAKE_CXXFLAGS += -std=c++11
+LIBS += -lboost_system `pkg-config --libs opencv protobuf`
+
 SOURCES += \
     CameraStreamer.cpp \
     ComClient.cpp \
-    main.cpp
+    main.cpp \
+    ovdrone.pb.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
     CameraStreamer.h \
-    ComClient.h
+    ComClient.h \
+    ovdrone.pb.h
 

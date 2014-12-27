@@ -2,7 +2,7 @@
 #include <sstream>
 #include <chrono>
 #include <iostream>
-#include "tankv1.pb.hpp"
+#include "ovdrone.pb.h"
 
 using namespace std;
 using namespace ovdrone;
@@ -24,10 +24,13 @@ ComClient::ComClient(string target_host)
 			return;
 
 		}
+        boost::asio::ip::tcp::no_delay option(true);
+        m_socket.set_option(option);
+
 		// Start the io service in a new thread
 		m_ioThread = thread(&ComClient::runIoService, this);
 
-		SendPing();
+        SendPing();
  	}
 	catch( boost::system::system_error &err ) {
 		cout << "[ComClient] Error in connect: " << err.what() << endl;
@@ -46,7 +49,7 @@ void ComClient::runIoService() {
 void ComClient::SendPing() {
 
 	auto now = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch());
-    tankv1::proto::Ping msg;
+    ovdrone::proto::Ping msg;
     msg.set_request_timestamp(now.count());
     msg.set_response_timestamp(now.count());
 
@@ -57,7 +60,7 @@ void ComClient::SendPing() {
 	// Magic number that is my birthday
 	*((uint32_t*)&m_writeBuffer[0]) = htobe32(14041992);
 	*((uint32_t*)&m_writeBuffer[4]) = htobe32(payloadSize); // Payload size
-	m_writeBuffer[8] = tankv1::proto::PING; // Message type
+    m_writeBuffer[8] = ovdrone::proto::PING; // Message type
 
 
 	if(!msg.SerializeToArray(&m_writeBuffer[header_size], payloadSize)) {

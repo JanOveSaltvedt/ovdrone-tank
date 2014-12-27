@@ -1,6 +1,7 @@
 #include "CameraStreamer.h"
 #include <sstream>
 #include <chrono>
+#include <thread>
 
 using namespace std;
 using namespace ovdrone;
@@ -81,22 +82,22 @@ void CameraStreamer::Capture() {
 	encodeParams[1] = 20;
 
 
-	namedWindow("input");
-	namedWindow("output");
+    //namedWindow("input");
+    //namedWindow("output");
 	while(true) {
 		cap >> frame;
 		// Get a timestamp
 		auto timestamp = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch());
 
-		imshow("input", frame);
+        //imshow("input", frame);
 
 		imencode(".jpg", frame, buffer, encodeParams);
 
 		SendFrame(buffer, timestamp.count());
-		
+        /*
 		imdecode(Mat(buffer), CV_LOAD_IMAGE_COLOR, &receivedFrame);
 
-		stringstream ss;
+        stringstream ss;
 		ss << "Size: " << buffer.size();
 		putText(receivedFrame, ss.str().c_str(), Point2f(10,10), FONT_HERSHEY_PLAIN, 1.0,  Scalar(0,0,255,255));
 
@@ -106,6 +107,7 @@ void CameraStreamer::Capture() {
 		putText(receivedFrame, ss.str().c_str(), Point2f(10,40), FONT_HERSHEY_PLAIN, 1.0,  Scalar(0,0,255,255));
 		imshow("output", receivedFrame);
 
-		if(waitKey(10) >= 0) break;
+        if(waitKey(10) >= 0) break;*/
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
 }
