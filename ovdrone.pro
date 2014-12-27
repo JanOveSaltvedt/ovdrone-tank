@@ -4,9 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-    tankV1.cpp \
     CameraStreamer.cpp \
-    ComClient.cpp
+    ComClient.cpp \
+    main.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
