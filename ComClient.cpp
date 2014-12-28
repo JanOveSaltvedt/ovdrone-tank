@@ -88,7 +88,7 @@ void ComClient::SendMessage(google::protobuf::Message *msg, proto::MessageTypes 
 
 void ComClient::startReadHeader() {
     m_readBuffer.resize(HEADER_SIZE); // Resize to the header size
-    boost::asio::async_read(m_socket, boost::asio::buffer(m_readBuffer), std::bind(&ComClient::handleReadHeader, shared_from_this(), std::placeholders::_1));
+    boost::asio::async_read(m_socket, boost::asio::buffer(m_readBuffer), std::bind(&ComClient::handleReadHeader, this, std::placeholders::_1));
 }
 
 void ComClient::handleReadHeader(const boost::system::error_code &ec) {
@@ -116,12 +116,12 @@ size_t ComClient::getPayloadSize() {
 
 void ComClient::startReadBody(size_t payloadSize) {
     m_readBuffer.resize(HEADER_SIZE+payloadSize); // Resize to the header size + payload
-    boost::asio::async_read(m_socket, boost::asio::buffer(&m_readBuffer[HEADER_SIZE], payloadSize), std::bind(&ComClient::handleReadBody, shared_from_this(), std::placeholders::_1));
+    boost::asio::async_read(m_socket, boost::asio::buffer(&m_readBuffer[HEADER_SIZE], payloadSize), std::bind(&ComClient::handleReadBody, this, std::placeholders::_1));
 }
 
 void ComClient::handleReadBody(const boost::system::error_code &ec) {
     if(!ec) {
-        cout << "Great we received a frame!" << endl;
+        //cout << "Great we received a frame!" << endl;
 
         uint8_t msgType = m_readBuffer[8];
 

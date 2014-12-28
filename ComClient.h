@@ -11,7 +11,7 @@
 
 namespace ovdrone {
 
-class ComClient : public std::enable_shared_from_this<ComClient> {
+class ComClient {
 public:
 	ComClient(std::string target_host);
 	~ComClient();
