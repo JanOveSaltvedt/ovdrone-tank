@@ -23,8 +23,9 @@ int main(int argc, const char** argv) {
     string wlan_interface_name(argv[2]);
 
     MotorController motorController;
-    ComClient comClient(controller_host, &motorController);
-	CameraStreamer capt(controller_host);
+    CameraStreamer capt(controller_host);
+    ComClient comClient(controller_host, &motorController, &capt);
+
     Utils utils;
 	capt.Start();
     //capt.Join();

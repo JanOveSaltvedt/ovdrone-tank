@@ -30,6 +30,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* NetworkStatus_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   NetworkStatus_reflection_ = NULL;
+const ::google::protobuf::Descriptor* VideoSettings_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  VideoSettings_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* MessageTypes_descriptor_ = NULL;
 
 }  // namespace
@@ -91,6 +94,23 @@ void protobuf_AssignDesc_ovdrone_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(NetworkStatus));
+  VideoSettings_descriptor_ = file->message_type(3);
+  static const int VideoSettings_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VideoSettings, jpeg_quality_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VideoSettings, frame_delay_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VideoSettings, grayscale_),
+  };
+  VideoSettings_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      VideoSettings_descriptor_,
+      VideoSettings::default_instance_,
+      VideoSettings_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VideoSettings, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VideoSettings, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(VideoSettings));
   MessageTypes_descriptor_ = file->enum_type(0);
 }
 
@@ -110,6 +130,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     MotorUpdate_descriptor_, &MotorUpdate::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     NetworkStatus_descriptor_, &NetworkStatus::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    VideoSettings_descriptor_, &VideoSettings::default_instance());
 }
 
 }  // namespace
@@ -121,6 +143,8 @@ void protobuf_ShutdownFile_ovdrone_2eproto() {
   delete MotorUpdate_reflection_;
   delete NetworkStatus::default_instance_;
   delete NetworkStatus_reflection_;
+  delete VideoSettings::default_instance_;
+  delete VideoSettings_reflection_;
 }
 
 void protobuf_AddDesc_ovdrone_2eproto() {
@@ -136,17 +160,21 @@ void protobuf_AddDesc_ovdrone_2eproto() {
     "(\002\022\r\n\005right\030\002 \002(\002\"o\n\rNetworkStatus\022\024\n\014ac"
     "cess_point\030\001 \002(\t\022\024\n\014signal_level\030\002 \002(\021\022\030"
     "\n\020link_quality_val\030\003 \002(\005\022\030\n\020link_quality"
-    "_max\030\004 \002(\005*K\n\014MessageTypes\022\013\n\007UNKNOWN\020\000\022"
-    "\010\n\004PING\020\001\022\020\n\014MOTOR_UPDATE\020\002\022\022\n\016NETWORK_S"
-    "TATUS\020\003", 327);
+    "_max\030\004 \002(\005\"M\n\rVideoSettings\022\024\n\014jpeg_qual"
+    "ity\030\001 \002(\005\022\023\n\013frame_delay\030\002 \002(\005\022\021\n\tgraysc"
+    "ale\030\003 \002(\010*_\n\014MessageTypes\022\013\n\007UNKNOWN\020\000\022\010"
+    "\n\004PING\020\001\022\020\n\014MOTOR_UPDATE\020\002\022\022\n\016NETWORK_ST"
+    "ATUS\020\003\022\022\n\016VIDEO_SETTINGS\020\004", 426);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ovdrone.proto", &protobuf_RegisterTypes);
   Ping::default_instance_ = new Ping();
   MotorUpdate::default_instance_ = new MotorUpdate();
   NetworkStatus::default_instance_ = new NetworkStatus();
+  VideoSettings::default_instance_ = new VideoSettings();
   Ping::default_instance_->InitAsDefaultInstance();
   MotorUpdate::default_instance_->InitAsDefaultInstance();
   NetworkStatus::default_instance_->InitAsDefaultInstance();
+  VideoSettings::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_ovdrone_2eproto);
 }
 
@@ -166,6 +194,7 @@ bool MessageTypes_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+    case 4:
       return true;
     default:
       return false;
@@ -1090,6 +1119,317 @@ void NetworkStatus::Swap(NetworkStatus* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = NetworkStatus_descriptor_;
   metadata.reflection = NetworkStatus_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int VideoSettings::kJpegQualityFieldNumber;
+const int VideoSettings::kFrameDelayFieldNumber;
+const int VideoSettings::kGrayscaleFieldNumber;
+#endif  // !_MSC_VER
+
+VideoSettings::VideoSettings()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ovdrone.proto.VideoSettings)
+}
+
+void VideoSettings::InitAsDefaultInstance() {
+}
+
+VideoSettings::VideoSettings(const VideoSettings& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:ovdrone.proto.VideoSettings)
+}
+
+void VideoSettings::SharedCtor() {
+  _cached_size_ = 0;
+  jpeg_quality_ = 0;
+  frame_delay_ = 0;
+  grayscale_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+VideoSettings::~VideoSettings() {
+  // @@protoc_insertion_point(destructor:ovdrone.proto.VideoSettings)
+  SharedDtor();
+}
+
+void VideoSettings::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void VideoSettings::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* VideoSettings::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return VideoSettings_descriptor_;
+}
+
+const VideoSettings& VideoSettings::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_ovdrone_2eproto();
+  return *default_instance_;
+}
+
+VideoSettings* VideoSettings::default_instance_ = NULL;
+
+VideoSettings* VideoSettings::New() const {
+  return new VideoSettings;
+}
+
+void VideoSettings::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<VideoSettings*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(jpeg_quality_, grayscale_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool VideoSettings::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ovdrone.proto.VideoSettings)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 jpeg_quality = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &jpeg_quality_)));
+          set_has_jpeg_quality();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_frame_delay;
+        break;
+      }
+
+      // required int32 frame_delay = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_frame_delay:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &frame_delay_)));
+          set_has_frame_delay();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_grayscale;
+        break;
+      }
+
+      // required bool grayscale = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_grayscale:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &grayscale_)));
+          set_has_grayscale();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ovdrone.proto.VideoSettings)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ovdrone.proto.VideoSettings)
+  return false;
+#undef DO_
+}
+
+void VideoSettings::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ovdrone.proto.VideoSettings)
+  // required int32 jpeg_quality = 1;
+  if (has_jpeg_quality()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->jpeg_quality(), output);
+  }
+
+  // required int32 frame_delay = 2;
+  if (has_frame_delay()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->frame_delay(), output);
+  }
+
+  // required bool grayscale = 3;
+  if (has_grayscale()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->grayscale(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:ovdrone.proto.VideoSettings)
+}
+
+::google::protobuf::uint8* VideoSettings::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ovdrone.proto.VideoSettings)
+  // required int32 jpeg_quality = 1;
+  if (has_jpeg_quality()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->jpeg_quality(), target);
+  }
+
+  // required int32 frame_delay = 2;
+  if (has_frame_delay()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->frame_delay(), target);
+  }
+
+  // required bool grayscale = 3;
+  if (has_grayscale()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->grayscale(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ovdrone.proto.VideoSettings)
+  return target;
+}
+
+int VideoSettings::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 jpeg_quality = 1;
+    if (has_jpeg_quality()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->jpeg_quality());
+    }
+
+    // required int32 frame_delay = 2;
+    if (has_frame_delay()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->frame_delay());
+    }
+
+    // required bool grayscale = 3;
+    if (has_grayscale()) {
+      total_size += 1 + 1;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void VideoSettings::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const VideoSettings* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const VideoSettings*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void VideoSettings::MergeFrom(const VideoSettings& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_jpeg_quality()) {
+      set_jpeg_quality(from.jpeg_quality());
+    }
+    if (from.has_frame_delay()) {
+      set_frame_delay(from.frame_delay());
+    }
+    if (from.has_grayscale()) {
+      set_grayscale(from.grayscale());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void VideoSettings::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void VideoSettings::CopyFrom(const VideoSettings& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool VideoSettings::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void VideoSettings::Swap(VideoSettings* other) {
+  if (other != this) {
+    std::swap(jpeg_quality_, other->jpeg_quality_);
+    std::swap(frame_delay_, other->frame_delay_);
+    std::swap(grayscale_, other->grayscale_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata VideoSettings::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = VideoSettings_descriptor_;
+  metadata.reflection = VideoSettings_reflection_;
   return metadata;
 }
 

@@ -10,7 +10,7 @@ using boost::asio::ip::udp;
 CameraStreamer::CameraStreamer(string target_host) 
 : m_remoteHost(target_host), 
 	m_ioService(), 
-	m_socket(m_ioService, udp::endpoint(udp::v4(), 0))
+    m_socket(m_ioService, udp::endpoint(udp::v4(), 0)), m_quality(50), m_frameDelay(30), m_grayscale(false)
  {
 
 	//m_ioService = boost::asio::io_service();
@@ -91,6 +91,7 @@ void CameraStreamer::Capture() {
 
         //imshow("input", frame);
 
+        encodeParams[1] = m_quality;
 		imencode(".jpg", frame, buffer, encodeParams);
 
 		SendFrame(buffer, timestamp.count());
@@ -108,6 +109,18 @@ void CameraStreamer::Capture() {
 		imshow("output", receivedFrame);
 
         if(waitKey(10) >= 0) break;*/
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+        std::this_thread::sleep_for(std::chrono::milliseconds(m_frameDelay));
 	}
+}
+
+void CameraStreamer::SetFrameDelay(int ms) {
+    m_frameDelay = ms;
+}
+
+void CameraStreamer::SetQuality(int quality) {
+    m_quality = quality;
+}
+
+void CameraStreamer::SetGrayscale(bool grayscale) {
+    m_grayscale = grayscale;
 }

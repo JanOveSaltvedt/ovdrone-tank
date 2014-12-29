@@ -8,13 +8,13 @@
 #include "ovdrone.pb.h"
 #include <mutex>
 #include "MotorController.h"
-
+#include "CameraStreamer.h"
 
 namespace ovdrone {
 
 class ComClient {
 public:
-    ComClient(std::string target_host, MotorController *mc);
+    ComClient(std::string target_host, MotorController *mc, CameraStreamer *cs);
 	~ComClient();
 
     void SendMessage(google::protobuf::Message* msg, ovdrone::proto::MessageTypes msgType);
@@ -33,6 +33,7 @@ private:
 
     void handlePing();
     void handleMotorUpdate();
+    void handleVideoSettings();
 
 private:
 	std::string m_remoteHost;
@@ -47,6 +48,7 @@ private:
 	std::vector<uint8_t> m_writeBuffer;
 
     MotorController *m_motorController;
+    CameraStreamer *m_cameraStreamer;
 };
 }
 

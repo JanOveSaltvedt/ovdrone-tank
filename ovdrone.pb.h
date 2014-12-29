@@ -38,16 +38,18 @@ void protobuf_ShutdownFile_ovdrone_2eproto();
 class Ping;
 class MotorUpdate;
 class NetworkStatus;
+class VideoSettings;
 
 enum MessageTypes {
   UNKNOWN = 0,
   PING = 1,
   MOTOR_UPDATE = 2,
-  NETWORK_STATUS = 3
+  NETWORK_STATUS = 3,
+  VIDEO_SETTINGS = 4
 };
 bool MessageTypes_IsValid(int value);
 const MessageTypes MessageTypes_MIN = UNKNOWN;
-const MessageTypes MessageTypes_MAX = NETWORK_STATUS;
+const MessageTypes MessageTypes_MAX = VIDEO_SETTINGS;
 const int MessageTypes_ARRAYSIZE = MessageTypes_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* MessageTypes_descriptor();
@@ -352,6 +354,105 @@ class NetworkStatus : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static NetworkStatus* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class VideoSettings : public ::google::protobuf::Message {
+ public:
+  VideoSettings();
+  virtual ~VideoSettings();
+
+  VideoSettings(const VideoSettings& from);
+
+  inline VideoSettings& operator=(const VideoSettings& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const VideoSettings& default_instance();
+
+  void Swap(VideoSettings* other);
+
+  // implements Message ----------------------------------------------
+
+  VideoSettings* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const VideoSettings& from);
+  void MergeFrom(const VideoSettings& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 jpeg_quality = 1;
+  inline bool has_jpeg_quality() const;
+  inline void clear_jpeg_quality();
+  static const int kJpegQualityFieldNumber = 1;
+  inline ::google::protobuf::int32 jpeg_quality() const;
+  inline void set_jpeg_quality(::google::protobuf::int32 value);
+
+  // required int32 frame_delay = 2;
+  inline bool has_frame_delay() const;
+  inline void clear_frame_delay();
+  static const int kFrameDelayFieldNumber = 2;
+  inline ::google::protobuf::int32 frame_delay() const;
+  inline void set_frame_delay(::google::protobuf::int32 value);
+
+  // required bool grayscale = 3;
+  inline bool has_grayscale() const;
+  inline void clear_grayscale();
+  static const int kGrayscaleFieldNumber = 3;
+  inline bool grayscale() const;
+  inline void set_grayscale(bool value);
+
+  // @@protoc_insertion_point(class_scope:ovdrone.proto.VideoSettings)
+ private:
+  inline void set_has_jpeg_quality();
+  inline void clear_has_jpeg_quality();
+  inline void set_has_frame_delay();
+  inline void clear_has_frame_delay();
+  inline void set_has_grayscale();
+  inline void clear_has_grayscale();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 jpeg_quality_;
+  ::google::protobuf::int32 frame_delay_;
+  bool grayscale_;
+  friend void  protobuf_AddDesc_ovdrone_2eproto();
+  friend void protobuf_AssignDesc_ovdrone_2eproto();
+  friend void protobuf_ShutdownFile_ovdrone_2eproto();
+
+  void InitAsDefaultInstance();
+  static VideoSettings* default_instance_;
+};
 // ===================================================================
 
 
@@ -609,6 +710,82 @@ inline void NetworkStatus::set_link_quality_max(::google::protobuf::int32 value)
   set_has_link_quality_max();
   link_quality_max_ = value;
   // @@protoc_insertion_point(field_set:ovdrone.proto.NetworkStatus.link_quality_max)
+}
+
+// -------------------------------------------------------------------
+
+// VideoSettings
+
+// required int32 jpeg_quality = 1;
+inline bool VideoSettings::has_jpeg_quality() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void VideoSettings::set_has_jpeg_quality() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void VideoSettings::clear_has_jpeg_quality() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void VideoSettings::clear_jpeg_quality() {
+  jpeg_quality_ = 0;
+  clear_has_jpeg_quality();
+}
+inline ::google::protobuf::int32 VideoSettings::jpeg_quality() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.VideoSettings.jpeg_quality)
+  return jpeg_quality_;
+}
+inline void VideoSettings::set_jpeg_quality(::google::protobuf::int32 value) {
+  set_has_jpeg_quality();
+  jpeg_quality_ = value;
+  // @@protoc_insertion_point(field_set:ovdrone.proto.VideoSettings.jpeg_quality)
+}
+
+// required int32 frame_delay = 2;
+inline bool VideoSettings::has_frame_delay() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void VideoSettings::set_has_frame_delay() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void VideoSettings::clear_has_frame_delay() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void VideoSettings::clear_frame_delay() {
+  frame_delay_ = 0;
+  clear_has_frame_delay();
+}
+inline ::google::protobuf::int32 VideoSettings::frame_delay() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.VideoSettings.frame_delay)
+  return frame_delay_;
+}
+inline void VideoSettings::set_frame_delay(::google::protobuf::int32 value) {
+  set_has_frame_delay();
+  frame_delay_ = value;
+  // @@protoc_insertion_point(field_set:ovdrone.proto.VideoSettings.frame_delay)
+}
+
+// required bool grayscale = 3;
+inline bool VideoSettings::has_grayscale() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void VideoSettings::set_has_grayscale() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void VideoSettings::clear_has_grayscale() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void VideoSettings::clear_grayscale() {
+  grayscale_ = false;
+  clear_has_grayscale();
+}
+inline bool VideoSettings::grayscale() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.VideoSettings.grayscale)
+  return grayscale_;
+}
+inline void VideoSettings::set_grayscale(bool value) {
+  set_has_grayscale();
+  grayscale_ = value;
+  // @@protoc_insertion_point(field_set:ovdrone.proto.VideoSettings.grayscale)
 }
 
 

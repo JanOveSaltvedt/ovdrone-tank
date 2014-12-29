@@ -8,11 +8,11 @@ using namespace std;
 using namespace ovdrone;
 using boost::asio::ip::tcp;
 
-ComClient::ComClient(string target_host, MotorController* mc)
+ComClient::ComClient(string target_host, MotorController* mc, CameraStreamer *cs)
 : m_remoteHost(target_host), 
 	m_ioService(), 
     m_socket(m_ioService),
-    m_motorController(mc)
+    m_motorController(mc), m_cameraStreamer(cs)
  {
  	try {
  		tcp::resolver resolver(m_ioService);
@@ -143,6 +143,9 @@ void ComClient::handleReadBody(const boost::system::error_code &ec) {
         case ovdrone::proto::MOTOR_UPDATE:
             handleMotorUpdate();
             break;
+        case ovdrone::proto::VIDEO_SETTINGS:
+            handleVideoSettings();
+            break;
         default:
             cout << "Unknown message with type " << msgType << " recieved" << endl;
         }
@@ -189,4 +192,22 @@ void ComClient::handleMotorUpdate() {
     }
 
     m_motorController->set(msg.left(), msg.right());
+}
+
+void ComClient::handleVideoSettings() {
+    ovdrone::proto::VideoSettings msg;
+
+    if(!msg.ParseFromArray(&m_readBuffer[HEADER_SIZE], getPayloadSize())) {
+        cout << "Could not decode the VideoSettings update message" << endl;
+        return;
+    }
+
+    if(!msg.IsInitialized()) {
+        cout << "Received an incomplete VideoSettings update message" << endl;
+        return;
+    }
+
+    m_cameraStreamer->SetFrameDelay(msg.frame_delay());
+    m_cameraStreamer->SetQuality(msg.jpeg_quality());
+    m_cameraStreamer->SetGrayscale(msg.grayscale());
 }

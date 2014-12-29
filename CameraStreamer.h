@@ -17,6 +17,10 @@ public:
 	void Start();
 	void Join();
 
+    void SetQuality(int quality);
+    void SetGrayscale(bool grayscale);
+    void SetFrameDelay(int ms);
+
 private:
 	void Capture();
 	void SendFrame(std::vector<uchar> &frame, uint64_t timestamp);
@@ -27,6 +31,10 @@ private:
 	boost::asio::io_service m_ioService;
 	boost::asio::ip::udp::socket m_socket;
 	boost::asio::ip::udp::endpoint m_endpoint;
+
+    int m_quality;
+    int m_frameDelay;
+    bool m_grayscale;
 };
 }
 
