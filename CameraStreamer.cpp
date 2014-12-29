@@ -75,8 +75,9 @@ void CameraStreamer::Capture() {
 	using namespace cv;
 	VideoCapture cap(0);
 	Mat frame;
-	Mat receivedFrame;
-	vector<uchar> buffer;
+    //Mat receivedFrame;
+    Mat grayscaleFrame;
+    vector<uchar> buffer;
 	vector<int> encodeParams = vector<int>(2);
 	encodeParams[0] = CV_IMWRITE_JPEG_QUALITY;
 	encodeParams[1] = 20;
@@ -91,8 +92,14 @@ void CameraStreamer::Capture() {
 
         //imshow("input", frame);
 
+        Mat* pFrame = &frame;
+        if(m_grayscale) {
+            cvtColor( frame, grayscaleFrame, CV_BGR2GRAY );
+            pFrame = &grayscaleFrame;
+        }
+
         encodeParams[1] = m_quality;
-		imencode(".jpg", frame, buffer, encodeParams);
+        imencode(".jpg", *pFrame, buffer, encodeParams);
 
 		SendFrame(buffer, timestamp.count());
         /*
