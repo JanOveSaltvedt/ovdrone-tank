@@ -7,17 +7,19 @@
 #include <boost/asio.hpp>
 #include "ovdrone.pb.h"
 #include <mutex>
+#include "MotorController.h"
 
 
 namespace ovdrone {
 
 class ComClient {
 public:
-	ComClient(std::string target_host);
+    ComClient(std::string target_host, MotorController *mc);
 	~ComClient();
 
     void SendMessage(google::protobuf::Message* msg, ovdrone::proto::MessageTypes msgType);
 
+    void SendNetworkUpdate(const std::string &ap, int signalLevel, int linkQualityVal, int linkQualityMax);
 
 private:
 	void runIoService();
@@ -30,9 +32,9 @@ private:
     void handleReadBody(const boost::system::error_code &ec);
 
     void handlePing();
+    void handleMotorUpdate();
 
 private:
-
 	std::string m_remoteHost;
 	std::thread m_ioThread;
 	boost::asio::io_service m_ioService;
@@ -43,6 +45,8 @@ private:
     enum { HEADER_SIZE = 9 };
 	std::vector<uint8_t> m_readBuffer;
 	std::vector<uint8_t> m_writeBuffer;
+
+    MotorController *m_motorController;
 };
 }
 

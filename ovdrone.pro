@@ -10,7 +10,9 @@ SOURCES += \
     CameraStreamer.cpp \
     ComClient.cpp \
     main.cpp \
-    ovdrone.pb.cpp
+    ovdrone.pb.cpp \
+    MotorController.cpp \
+    Utils.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -18,5 +20,7 @@ qtcAddDeployment()
 HEADERS += \
     CameraStreamer.h \
     ComClient.h \
-    ovdrone.pb.h
+    ovdrone.pb.h \
+    MotorController.h \
+    Utils.h
 

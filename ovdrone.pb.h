@@ -36,14 +36,18 @@ void protobuf_AssignDesc_ovdrone_2eproto();
 void protobuf_ShutdownFile_ovdrone_2eproto();
 
 class Ping;
+class MotorUpdate;
+class NetworkStatus;
 
 enum MessageTypes {
   UNKNOWN = 0,
-  PING = 1
+  PING = 1,
+  MOTOR_UPDATE = 2,
+  NETWORK_STATUS = 3
 };
 bool MessageTypes_IsValid(int value);
 const MessageTypes MessageTypes_MIN = UNKNOWN;
-const MessageTypes MessageTypes_MAX = PING;
+const MessageTypes MessageTypes_MAX = NETWORK_STATUS;
 const int MessageTypes_ARRAYSIZE = MessageTypes_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* MessageTypes_descriptor();
@@ -145,6 +149,209 @@ class Ping : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static Ping* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class MotorUpdate : public ::google::protobuf::Message {
+ public:
+  MotorUpdate();
+  virtual ~MotorUpdate();
+
+  MotorUpdate(const MotorUpdate& from);
+
+  inline MotorUpdate& operator=(const MotorUpdate& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MotorUpdate& default_instance();
+
+  void Swap(MotorUpdate* other);
+
+  // implements Message ----------------------------------------------
+
+  MotorUpdate* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MotorUpdate& from);
+  void MergeFrom(const MotorUpdate& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float left = 1;
+  inline bool has_left() const;
+  inline void clear_left();
+  static const int kLeftFieldNumber = 1;
+  inline float left() const;
+  inline void set_left(float value);
+
+  // required float right = 2;
+  inline bool has_right() const;
+  inline void clear_right();
+  static const int kRightFieldNumber = 2;
+  inline float right() const;
+  inline void set_right(float value);
+
+  // @@protoc_insertion_point(class_scope:ovdrone.proto.MotorUpdate)
+ private:
+  inline void set_has_left();
+  inline void clear_has_left();
+  inline void set_has_right();
+  inline void clear_has_right();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  float left_;
+  float right_;
+  friend void  protobuf_AddDesc_ovdrone_2eproto();
+  friend void protobuf_AssignDesc_ovdrone_2eproto();
+  friend void protobuf_ShutdownFile_ovdrone_2eproto();
+
+  void InitAsDefaultInstance();
+  static MotorUpdate* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class NetworkStatus : public ::google::protobuf::Message {
+ public:
+  NetworkStatus();
+  virtual ~NetworkStatus();
+
+  NetworkStatus(const NetworkStatus& from);
+
+  inline NetworkStatus& operator=(const NetworkStatus& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const NetworkStatus& default_instance();
+
+  void Swap(NetworkStatus* other);
+
+  // implements Message ----------------------------------------------
+
+  NetworkStatus* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const NetworkStatus& from);
+  void MergeFrom(const NetworkStatus& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string access_point = 1;
+  inline bool has_access_point() const;
+  inline void clear_access_point();
+  static const int kAccessPointFieldNumber = 1;
+  inline const ::std::string& access_point() const;
+  inline void set_access_point(const ::std::string& value);
+  inline void set_access_point(const char* value);
+  inline void set_access_point(const char* value, size_t size);
+  inline ::std::string* mutable_access_point();
+  inline ::std::string* release_access_point();
+  inline void set_allocated_access_point(::std::string* access_point);
+
+  // required sint32 signal_level = 2;
+  inline bool has_signal_level() const;
+  inline void clear_signal_level();
+  static const int kSignalLevelFieldNumber = 2;
+  inline ::google::protobuf::int32 signal_level() const;
+  inline void set_signal_level(::google::protobuf::int32 value);
+
+  // required int32 link_quality_val = 3;
+  inline bool has_link_quality_val() const;
+  inline void clear_link_quality_val();
+  static const int kLinkQualityValFieldNumber = 3;
+  inline ::google::protobuf::int32 link_quality_val() const;
+  inline void set_link_quality_val(::google::protobuf::int32 value);
+
+  // required int32 link_quality_max = 4;
+  inline bool has_link_quality_max() const;
+  inline void clear_link_quality_max();
+  static const int kLinkQualityMaxFieldNumber = 4;
+  inline ::google::protobuf::int32 link_quality_max() const;
+  inline void set_link_quality_max(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:ovdrone.proto.NetworkStatus)
+ private:
+  inline void set_has_access_point();
+  inline void clear_has_access_point();
+  inline void set_has_signal_level();
+  inline void clear_has_signal_level();
+  inline void set_has_link_quality_val();
+  inline void clear_has_link_quality_val();
+  inline void set_has_link_quality_max();
+  inline void clear_has_link_quality_max();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* access_point_;
+  ::google::protobuf::int32 signal_level_;
+  ::google::protobuf::int32 link_quality_val_;
+  ::google::protobuf::int32 link_quality_max_;
+  friend void  protobuf_AddDesc_ovdrone_2eproto();
+  friend void protobuf_AssignDesc_ovdrone_2eproto();
+  friend void protobuf_ShutdownFile_ovdrone_2eproto();
+
+  void InitAsDefaultInstance();
+  static NetworkStatus* default_instance_;
+};
 // ===================================================================
 
 
@@ -198,6 +405,210 @@ inline void Ping::set_response_timestamp(::google::protobuf::uint64 value) {
   set_has_response_timestamp();
   response_timestamp_ = value;
   // @@protoc_insertion_point(field_set:ovdrone.proto.Ping.response_timestamp)
+}
+
+// -------------------------------------------------------------------
+
+// MotorUpdate
+
+// required float left = 1;
+inline bool MotorUpdate::has_left() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MotorUpdate::set_has_left() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MotorUpdate::clear_has_left() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MotorUpdate::clear_left() {
+  left_ = 0;
+  clear_has_left();
+}
+inline float MotorUpdate::left() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.MotorUpdate.left)
+  return left_;
+}
+inline void MotorUpdate::set_left(float value) {
+  set_has_left();
+  left_ = value;
+  // @@protoc_insertion_point(field_set:ovdrone.proto.MotorUpdate.left)
+}
+
+// required float right = 2;
+inline bool MotorUpdate::has_right() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MotorUpdate::set_has_right() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MotorUpdate::clear_has_right() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MotorUpdate::clear_right() {
+  right_ = 0;
+  clear_has_right();
+}
+inline float MotorUpdate::right() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.MotorUpdate.right)
+  return right_;
+}
+inline void MotorUpdate::set_right(float value) {
+  set_has_right();
+  right_ = value;
+  // @@protoc_insertion_point(field_set:ovdrone.proto.MotorUpdate.right)
+}
+
+// -------------------------------------------------------------------
+
+// NetworkStatus
+
+// required string access_point = 1;
+inline bool NetworkStatus::has_access_point() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void NetworkStatus::set_has_access_point() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void NetworkStatus::clear_has_access_point() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void NetworkStatus::clear_access_point() {
+  if (access_point_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    access_point_->clear();
+  }
+  clear_has_access_point();
+}
+inline const ::std::string& NetworkStatus::access_point() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.NetworkStatus.access_point)
+  return *access_point_;
+}
+inline void NetworkStatus::set_access_point(const ::std::string& value) {
+  set_has_access_point();
+  if (access_point_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    access_point_ = new ::std::string;
+  }
+  access_point_->assign(value);
+  // @@protoc_insertion_point(field_set:ovdrone.proto.NetworkStatus.access_point)
+}
+inline void NetworkStatus::set_access_point(const char* value) {
+  set_has_access_point();
+  if (access_point_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    access_point_ = new ::std::string;
+  }
+  access_point_->assign(value);
+  // @@protoc_insertion_point(field_set_char:ovdrone.proto.NetworkStatus.access_point)
+}
+inline void NetworkStatus::set_access_point(const char* value, size_t size) {
+  set_has_access_point();
+  if (access_point_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    access_point_ = new ::std::string;
+  }
+  access_point_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:ovdrone.proto.NetworkStatus.access_point)
+}
+inline ::std::string* NetworkStatus::mutable_access_point() {
+  set_has_access_point();
+  if (access_point_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    access_point_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:ovdrone.proto.NetworkStatus.access_point)
+  return access_point_;
+}
+inline ::std::string* NetworkStatus::release_access_point() {
+  clear_has_access_point();
+  if (access_point_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = access_point_;
+    access_point_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void NetworkStatus::set_allocated_access_point(::std::string* access_point) {
+  if (access_point_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete access_point_;
+  }
+  if (access_point) {
+    set_has_access_point();
+    access_point_ = access_point;
+  } else {
+    clear_has_access_point();
+    access_point_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:ovdrone.proto.NetworkStatus.access_point)
+}
+
+// required sint32 signal_level = 2;
+inline bool NetworkStatus::has_signal_level() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void NetworkStatus::set_has_signal_level() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void NetworkStatus::clear_has_signal_level() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void NetworkStatus::clear_signal_level() {
+  signal_level_ = 0;
+  clear_has_signal_level();
+}
+inline ::google::protobuf::int32 NetworkStatus::signal_level() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.NetworkStatus.signal_level)
+  return signal_level_;
+}
+inline void NetworkStatus::set_signal_level(::google::protobuf::int32 value) {
+  set_has_signal_level();
+  signal_level_ = value;
+  // @@protoc_insertion_point(field_set:ovdrone.proto.NetworkStatus.signal_level)
+}
+
+// required int32 link_quality_val = 3;
+inline bool NetworkStatus::has_link_quality_val() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void NetworkStatus::set_has_link_quality_val() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void NetworkStatus::clear_has_link_quality_val() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void NetworkStatus::clear_link_quality_val() {
+  link_quality_val_ = 0;
+  clear_has_link_quality_val();
+}
+inline ::google::protobuf::int32 NetworkStatus::link_quality_val() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.NetworkStatus.link_quality_val)
+  return link_quality_val_;
+}
+inline void NetworkStatus::set_link_quality_val(::google::protobuf::int32 value) {
+  set_has_link_quality_val();
+  link_quality_val_ = value;
+  // @@protoc_insertion_point(field_set:ovdrone.proto.NetworkStatus.link_quality_val)
+}
+
+// required int32 link_quality_max = 4;
+inline bool NetworkStatus::has_link_quality_max() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void NetworkStatus::set_has_link_quality_max() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void NetworkStatus::clear_has_link_quality_max() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void NetworkStatus::clear_link_quality_max() {
+  link_quality_max_ = 0;
+  clear_has_link_quality_max();
+}
+inline ::google::protobuf::int32 NetworkStatus::link_quality_max() const {
+  // @@protoc_insertion_point(field_get:ovdrone.proto.NetworkStatus.link_quality_max)
+  return link_quality_max_;
+}
+inline void NetworkStatus::set_link_quality_max(::google::protobuf::int32 value) {
+  set_has_link_quality_max();
+  link_quality_max_ = value;
+  // @@protoc_insertion_point(field_set:ovdrone.proto.NetworkStatus.link_quality_max)
 }
 
 

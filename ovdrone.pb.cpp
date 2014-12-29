@@ -24,6 +24,12 @@ namespace {
 const ::google::protobuf::Descriptor* Ping_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Ping_reflection_ = NULL;
+const ::google::protobuf::Descriptor* MotorUpdate_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  MotorUpdate_reflection_ = NULL;
+const ::google::protobuf::Descriptor* NetworkStatus_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  NetworkStatus_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* MessageTypes_descriptor_ = NULL;
 
 }  // namespace
@@ -51,6 +57,40 @@ void protobuf_AssignDesc_ovdrone_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Ping));
+  MotorUpdate_descriptor_ = file->message_type(1);
+  static const int MotorUpdate_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MotorUpdate, left_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MotorUpdate, right_),
+  };
+  MotorUpdate_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      MotorUpdate_descriptor_,
+      MotorUpdate::default_instance_,
+      MotorUpdate_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MotorUpdate, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MotorUpdate, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(MotorUpdate));
+  NetworkStatus_descriptor_ = file->message_type(2);
+  static const int NetworkStatus_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetworkStatus, access_point_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetworkStatus, signal_level_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetworkStatus, link_quality_val_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetworkStatus, link_quality_max_),
+  };
+  NetworkStatus_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      NetworkStatus_descriptor_,
+      NetworkStatus::default_instance_,
+      NetworkStatus_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetworkStatus, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetworkStatus, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(NetworkStatus));
   MessageTypes_descriptor_ = file->enum_type(0);
 }
 
@@ -66,6 +106,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Ping_descriptor_, &Ping::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    MotorUpdate_descriptor_, &MotorUpdate::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    NetworkStatus_descriptor_, &NetworkStatus::default_instance());
 }
 
 }  // namespace
@@ -73,6 +117,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_ovdrone_2eproto() {
   delete Ping::default_instance_;
   delete Ping_reflection_;
+  delete MotorUpdate::default_instance_;
+  delete MotorUpdate_reflection_;
+  delete NetworkStatus::default_instance_;
+  delete NetworkStatus_reflection_;
 }
 
 void protobuf_AddDesc_ovdrone_2eproto() {
@@ -84,12 +132,21 @@ void protobuf_AddDesc_ovdrone_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\rovdrone.proto\022\rovdrone.proto\"=\n\004Ping\022\031"
     "\n\021request_timestamp\030\001 \002(\004\022\032\n\022response_ti"
-    "mestamp\030\002 \001(\004*%\n\014MessageTypes\022\013\n\007UNKNOWN"
-    "\020\000\022\010\n\004PING\020\001", 132);
+    "mestamp\030\002 \001(\004\"*\n\013MotorUpdate\022\014\n\004left\030\001 \002"
+    "(\002\022\r\n\005right\030\002 \002(\002\"o\n\rNetworkStatus\022\024\n\014ac"
+    "cess_point\030\001 \002(\t\022\024\n\014signal_level\030\002 \002(\021\022\030"
+    "\n\020link_quality_val\030\003 \002(\005\022\030\n\020link_quality"
+    "_max\030\004 \002(\005*K\n\014MessageTypes\022\013\n\007UNKNOWN\020\000\022"
+    "\010\n\004PING\020\001\022\020\n\014MOTOR_UPDATE\020\002\022\022\n\016NETWORK_S"
+    "TATUS\020\003", 327);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ovdrone.proto", &protobuf_RegisterTypes);
   Ping::default_instance_ = new Ping();
+  MotorUpdate::default_instance_ = new MotorUpdate();
+  NetworkStatus::default_instance_ = new NetworkStatus();
   Ping::default_instance_->InitAsDefaultInstance();
+  MotorUpdate::default_instance_->InitAsDefaultInstance();
+  NetworkStatus::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_ovdrone_2eproto);
 }
 
@@ -107,6 +164,8 @@ bool MessageTypes_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 2:
+    case 3:
       return true;
     default:
       return false;
@@ -385,6 +444,652 @@ void Ping::Swap(Ping* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = Ping_descriptor_;
   metadata.reflection = Ping_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int MotorUpdate::kLeftFieldNumber;
+const int MotorUpdate::kRightFieldNumber;
+#endif  // !_MSC_VER
+
+MotorUpdate::MotorUpdate()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ovdrone.proto.MotorUpdate)
+}
+
+void MotorUpdate::InitAsDefaultInstance() {
+}
+
+MotorUpdate::MotorUpdate(const MotorUpdate& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:ovdrone.proto.MotorUpdate)
+}
+
+void MotorUpdate::SharedCtor() {
+  _cached_size_ = 0;
+  left_ = 0;
+  right_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+MotorUpdate::~MotorUpdate() {
+  // @@protoc_insertion_point(destructor:ovdrone.proto.MotorUpdate)
+  SharedDtor();
+}
+
+void MotorUpdate::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void MotorUpdate::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* MotorUpdate::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return MotorUpdate_descriptor_;
+}
+
+const MotorUpdate& MotorUpdate::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_ovdrone_2eproto();
+  return *default_instance_;
+}
+
+MotorUpdate* MotorUpdate::default_instance_ = NULL;
+
+MotorUpdate* MotorUpdate::New() const {
+  return new MotorUpdate;
+}
+
+void MotorUpdate::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<MotorUpdate*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(left_, right_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool MotorUpdate::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ovdrone.proto.MotorUpdate)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required float left = 1;
+      case 1: {
+        if (tag == 13) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &left_)));
+          set_has_left();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(21)) goto parse_right;
+        break;
+      }
+
+      // required float right = 2;
+      case 2: {
+        if (tag == 21) {
+         parse_right:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &right_)));
+          set_has_right();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ovdrone.proto.MotorUpdate)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ovdrone.proto.MotorUpdate)
+  return false;
+#undef DO_
+}
+
+void MotorUpdate::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ovdrone.proto.MotorUpdate)
+  // required float left = 1;
+  if (has_left()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->left(), output);
+  }
+
+  // required float right = 2;
+  if (has_right()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->right(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:ovdrone.proto.MotorUpdate)
+}
+
+::google::protobuf::uint8* MotorUpdate::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ovdrone.proto.MotorUpdate)
+  // required float left = 1;
+  if (has_left()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->left(), target);
+  }
+
+  // required float right = 2;
+  if (has_right()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->right(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ovdrone.proto.MotorUpdate)
+  return target;
+}
+
+int MotorUpdate::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required float left = 1;
+    if (has_left()) {
+      total_size += 1 + 4;
+    }
+
+    // required float right = 2;
+    if (has_right()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void MotorUpdate::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const MotorUpdate* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MotorUpdate*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void MotorUpdate::MergeFrom(const MotorUpdate& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_left()) {
+      set_left(from.left());
+    }
+    if (from.has_right()) {
+      set_right(from.right());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void MotorUpdate::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MotorUpdate::CopyFrom(const MotorUpdate& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MotorUpdate::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void MotorUpdate::Swap(MotorUpdate* other) {
+  if (other != this) {
+    std::swap(left_, other->left_);
+    std::swap(right_, other->right_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata MotorUpdate::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = MotorUpdate_descriptor_;
+  metadata.reflection = MotorUpdate_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int NetworkStatus::kAccessPointFieldNumber;
+const int NetworkStatus::kSignalLevelFieldNumber;
+const int NetworkStatus::kLinkQualityValFieldNumber;
+const int NetworkStatus::kLinkQualityMaxFieldNumber;
+#endif  // !_MSC_VER
+
+NetworkStatus::NetworkStatus()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ovdrone.proto.NetworkStatus)
+}
+
+void NetworkStatus::InitAsDefaultInstance() {
+}
+
+NetworkStatus::NetworkStatus(const NetworkStatus& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:ovdrone.proto.NetworkStatus)
+}
+
+void NetworkStatus::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  access_point_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  signal_level_ = 0;
+  link_quality_val_ = 0;
+  link_quality_max_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+NetworkStatus::~NetworkStatus() {
+  // @@protoc_insertion_point(destructor:ovdrone.proto.NetworkStatus)
+  SharedDtor();
+}
+
+void NetworkStatus::SharedDtor() {
+  if (access_point_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete access_point_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void NetworkStatus::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* NetworkStatus::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return NetworkStatus_descriptor_;
+}
+
+const NetworkStatus& NetworkStatus::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_ovdrone_2eproto();
+  return *default_instance_;
+}
+
+NetworkStatus* NetworkStatus::default_instance_ = NULL;
+
+NetworkStatus* NetworkStatus::New() const {
+  return new NetworkStatus;
+}
+
+void NetworkStatus::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<NetworkStatus*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 15) {
+    ZR_(signal_level_, link_quality_max_);
+    if (has_access_point()) {
+      if (access_point_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        access_point_->clear();
+      }
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool NetworkStatus::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ovdrone.proto.NetworkStatus)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string access_point = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_access_point()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->access_point().data(), this->access_point().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "access_point");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_signal_level;
+        break;
+      }
+
+      // required sint32 signal_level = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_signal_level:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                 input, &signal_level_)));
+          set_has_signal_level();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_link_quality_val;
+        break;
+      }
+
+      // required int32 link_quality_val = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_link_quality_val:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &link_quality_val_)));
+          set_has_link_quality_val();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_link_quality_max;
+        break;
+      }
+
+      // required int32 link_quality_max = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_link_quality_max:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &link_quality_max_)));
+          set_has_link_quality_max();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ovdrone.proto.NetworkStatus)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ovdrone.proto.NetworkStatus)
+  return false;
+#undef DO_
+}
+
+void NetworkStatus::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ovdrone.proto.NetworkStatus)
+  // required string access_point = 1;
+  if (has_access_point()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->access_point().data(), this->access_point().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "access_point");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->access_point(), output);
+  }
+
+  // required sint32 signal_level = 2;
+  if (has_signal_level()) {
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->signal_level(), output);
+  }
+
+  // required int32 link_quality_val = 3;
+  if (has_link_quality_val()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->link_quality_val(), output);
+  }
+
+  // required int32 link_quality_max = 4;
+  if (has_link_quality_max()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->link_quality_max(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:ovdrone.proto.NetworkStatus)
+}
+
+::google::protobuf::uint8* NetworkStatus::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ovdrone.proto.NetworkStatus)
+  // required string access_point = 1;
+  if (has_access_point()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->access_point().data(), this->access_point().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "access_point");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->access_point(), target);
+  }
+
+  // required sint32 signal_level = 2;
+  if (has_signal_level()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->signal_level(), target);
+  }
+
+  // required int32 link_quality_val = 3;
+  if (has_link_quality_val()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->link_quality_val(), target);
+  }
+
+  // required int32 link_quality_max = 4;
+  if (has_link_quality_max()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->link_quality_max(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ovdrone.proto.NetworkStatus)
+  return target;
+}
+
+int NetworkStatus::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string access_point = 1;
+    if (has_access_point()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->access_point());
+    }
+
+    // required sint32 signal_level = 2;
+    if (has_signal_level()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+          this->signal_level());
+    }
+
+    // required int32 link_quality_val = 3;
+    if (has_link_quality_val()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->link_quality_val());
+    }
+
+    // required int32 link_quality_max = 4;
+    if (has_link_quality_max()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->link_quality_max());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void NetworkStatus::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const NetworkStatus* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const NetworkStatus*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void NetworkStatus::MergeFrom(const NetworkStatus& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_access_point()) {
+      set_access_point(from.access_point());
+    }
+    if (from.has_signal_level()) {
+      set_signal_level(from.signal_level());
+    }
+    if (from.has_link_quality_val()) {
+      set_link_quality_val(from.link_quality_val());
+    }
+    if (from.has_link_quality_max()) {
+      set_link_quality_max(from.link_quality_max());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void NetworkStatus::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void NetworkStatus::CopyFrom(const NetworkStatus& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool NetworkStatus::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+
+  return true;
+}
+
+void NetworkStatus::Swap(NetworkStatus* other) {
+  if (other != this) {
+    std::swap(access_point_, other->access_point_);
+    std::swap(signal_level_, other->signal_level_);
+    std::swap(link_quality_val_, other->link_quality_val_);
+    std::swap(link_quality_max_, other->link_quality_max_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata NetworkStatus::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = NetworkStatus_descriptor_;
+  metadata.reflection = NetworkStatus_reflection_;
   return metadata;
 }
 

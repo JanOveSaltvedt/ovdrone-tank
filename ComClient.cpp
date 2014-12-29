@@ -8,10 +8,11 @@ using namespace std;
 using namespace ovdrone;
 using boost::asio::ip::tcp;
 
-ComClient::ComClient(string target_host) 
+ComClient::ComClient(string target_host, MotorController* mc)
 : m_remoteHost(target_host), 
 	m_ioService(), 
-	m_socket(m_ioService)
+    m_socket(m_ioService),
+    m_motorController(mc)
  {
  	try {
  		tcp::resolver resolver(m_ioService);
@@ -85,6 +86,16 @@ void ComClient::SendMessage(google::protobuf::Message *msg, proto::MessageTypes 
     }
 }
 
+void ComClient::SendNetworkUpdate(const string &ap, int signalLevel, int linkQualityVal, int linkQualityMax) {
+    proto::NetworkStatus msg;
+    msg.set_access_point(ap);
+    msg.set_signal_level(signalLevel);
+    msg.set_link_quality_val(linkQualityVal);
+    msg.set_link_quality_max(linkQualityMax);
+
+    SendMessage(&msg, proto::NETWORK_STATUS);
+}
+
 
 void ComClient::startReadHeader() {
     m_readBuffer.resize(HEADER_SIZE); // Resize to the header size
@@ -129,6 +140,9 @@ void ComClient::handleReadBody(const boost::system::error_code &ec) {
         case ovdrone::proto::PING:
             handlePing();
             break;
+        case ovdrone::proto::MOTOR_UPDATE:
+            handleMotorUpdate();
+            break;
         default:
             cout << "Unknown message with type " << msgType << " recieved" << endl;
         }
@@ -159,4 +173,20 @@ void ComClient::handlePing() {
     uint64_t timestamp = now.count();
     msg.set_response_timestamp(timestamp);
     SendMessage(&msg, ovdrone::proto::PING);
+}
+
+void ComClient::handleMotorUpdate() {
+    ovdrone::proto::MotorUpdate msg;
+
+    if(!msg.ParseFromArray(&m_readBuffer[HEADER_SIZE], getPayloadSize())) {
+        cout << "Could not decode the motor update message" << endl;
+        return;
+    }
+
+    if(!msg.IsInitialized()) {
+        cout << "Received an incomplete motor update message" << endl;
+        return;
+    }
+
+    m_motorController->set(msg.left(), msg.right());
 }
