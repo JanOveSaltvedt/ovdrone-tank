@@ -16,8 +16,9 @@ CameraStreamer::CameraStreamer(string target_host)
 	//m_ioService = boost::asio::io_service();
 	//m_socket = udp::socket();
 
+    //boost::asio::ip::basic_resolver_query q(udp::v4(), target_host, "daytime");
 	udp::resolver resolver(m_ioService);
-	m_endpoint = *resolver.resolve({udp::v4(), "127.0.0.1", "9124"});
+    m_endpoint = *resolver.resolve({udp::v4(), target_host, "9124"});
 
 }
 

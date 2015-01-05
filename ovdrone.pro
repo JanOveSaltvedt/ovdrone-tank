@@ -14,8 +14,8 @@ SOURCES += \
     MotorController.cpp \
     Utils.cpp
 
-include(deployment.pri)
-qtcAddDeployment()
+#include(deployment.pri)
+#qtcAddDeployment()
 
 HEADERS += \
     CameraStreamer.h \
