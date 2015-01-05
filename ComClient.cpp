@@ -16,7 +16,7 @@ ComClient::ComClient(string target_host, MotorController* mc, CameraStreamer *cs
  {
  	try {
  		tcp::resolver resolver(m_ioService);
-		m_endpoint = *resolver.resolve({tcp::v4(), "127.0.0.1", "9123"});
+        m_endpoint = *resolver.resolve({tcp::v4(), target_host, "9123"});
 
 		boost::asio::connect(m_socket, resolver.resolve({tcp::v4(), "127.0.0.1", "9123"}));
 
