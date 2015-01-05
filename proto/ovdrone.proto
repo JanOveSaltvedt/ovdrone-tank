@@ -1,1 +1,32 @@
-../../dronecontroller/proto/ovdrone.proto
+package ovdrone.proto;
+
+enum MessageTypes {
+    UNKNOWN = 0;
+    PING = 1;
+    MOTOR_UPDATE = 2;
+    NETWORK_STATUS = 3;
+    VIDEO_SETTINGS = 4;
+}
+
+message Ping {
+    required uint64 request_timestamp = 1;
+    optional uint64 response_timestamp = 2;
+}
+
+message MotorUpdate {
+    required float left = 1;
+    required float right = 2;
+}
+
+message NetworkStatus {
+    required string access_point = 1;
+    required sint32 signal_level = 2;
+    required int32  link_quality_val = 3;
+    required int32  link_quality_max = 4;
+}
+
+message VideoSettings {
+    required int32 jpeg_quality = 1;
+    required int32 frame_delay = 2;
+    required bool grayscale = 3;
+}
