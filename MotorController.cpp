@@ -81,10 +81,10 @@ void MotorController::set(float left, float right) {
 
     if(right >= 0.0f) {
         m_rightBackwards.setDutyPercent(0.0f);
-        m_rightForward.setDutyPercent(left*100.0f);
+        m_rightForward.setDutyPercent(right*100.0f);
     }
     else {
-        m_rightBackwards.setDutyPercent(left*-100.0f);
+        m_rightBackwards.setDutyPercent(right*-100.0f);
         m_rightForward.setDutyPercent(0);
     }
 
