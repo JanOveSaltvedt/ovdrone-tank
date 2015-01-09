@@ -12,7 +12,11 @@ SOURCES += \
     main.cpp \
     ovdrone.pb.cpp \
     MotorController.cpp \
-    Utils.cpp
+    Utils.cpp \
+    BlackADC.cpp \
+    BlackCore.cpp \
+    BlackGPIO.cpp \
+    BlackPWM.cpp
 
 #include(deployment.pri)
 #qtcAddDeployment()
@@ -22,5 +26,12 @@ HEADERS += \
     ComClient.h \
     ovdrone.pb.h \
     MotorController.h \
-    Utils.h
+    Utils.h \
+    BlackADC.h \
+    BlackCore.h \
+    BlackDef.h \
+    BlackErr.h \
+    BlackGPIO.h \
+    BlackLib.h \
+    BlackPWM.h
 
