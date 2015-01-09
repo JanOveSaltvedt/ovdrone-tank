@@ -77,7 +77,7 @@ void CameraStreamer::Capture() {
     VideoCapture cap(0);
 
     if(!cap.isOpened()) {
-        cout << "Couød not open camera for capturing." << endl;
+        cout << "Could not open camera for capturing." << endl;
         return;
     }
 
@@ -97,9 +97,9 @@ void CameraStreamer::Capture() {
     //namedWindow("input");
     //namedWindow("output");
 	while(true) {
+        // Get a timestamp
+        auto timestamp = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch());
 		cap >> frame;
-		// Get a timestamp
-		auto timestamp = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch());
 
         //imshow("input", frame);
 
