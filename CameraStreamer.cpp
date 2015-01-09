@@ -74,7 +74,17 @@ void CameraStreamer::SendFrame(vector<uchar> &frame, uint64_t timestamp) {
 
 void CameraStreamer::Capture() {
 	using namespace cv;
-	VideoCapture cap(0);
+    VideoCapture cap(0);
+
+    if(!cap.isOpened()) {
+        cout << "Couød not open camera for capturing." << endl;
+        return;
+    }
+
+    cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT,240);
+
+
 	Mat frame;
     //Mat receivedFrame;
     Mat grayscaleFrame;
