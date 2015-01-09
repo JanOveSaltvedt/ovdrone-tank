@@ -12,13 +12,10 @@
 using namespace std;
 using namespace ovdrone;
 
-MotorController* g_pMotorController;
+bool g_run = true;
 
 void signalHandler( int signum ) {
-    if(g_pMotorController != nullptr) {
-        g_pMotorController->set(0.0f, 0.0f);
-    }
-
+    g_run = false;
     cout << "Got signal: " << signum << endl;
 
     exit(signum);
@@ -39,7 +36,6 @@ int main(int argc, const char** argv) {
     string wlan_interface_name(argv[2]);
 
     MotorController motorController;
-    g_pMotorController = &motorController;
     CameraStreamer capt(controller_host);
     ComClient comClient(controller_host, &motorController, &capt);
 
@@ -49,7 +45,7 @@ int main(int argc, const char** argv) {
 
     int counter = 0;
     auto wait_until = std::chrono::system_clock::now() + std::chrono::milliseconds(100);
-    while(true) {
+    while(g_run) {
         std::this_thread::sleep_until(wait_until);
         wait_until = std::chrono::system_clock::now() + std::chrono::milliseconds(100);
         counter++;
@@ -76,5 +72,7 @@ int main(int argc, const char** argv) {
             cout << "NetworkStatus[AP=" << utils.getAccessPoint() << ", SignalLevel=" << utils.getSignalLevel() << "dBm, LinkQuality=" << utils.getLinkQualityValue() << "/" << utils.getLinkQualityMax() << "]" << endl;
         }
     }
+
+    motorController.set(0.0f, 0.0f);
     return 0;
 }
