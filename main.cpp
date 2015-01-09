@@ -7,11 +7,27 @@
 #include <chrono>
 #include <iomanip>
 #include "Utils.h"
+#include <csignal>
 
 using namespace std;
 using namespace ovdrone;
 
+MotorController* g_pMotorController;
+
+void signalHandler( int signum ) {
+    if(g_pMotorController != nullptr) {
+        g_pMotorController->set(0.0f, 0.0f);
+    }
+
+    cout << "Got signal: " << signum << endl;
+
+    exit(signum);
+}
+
 int main(int argc, const char** argv) {
+    // register signal SIGINT and signal handler
+    signal(SIGINT, signalHandler);
+
     if(argc != 3) {
 		cout << "Invalid argument count..." << endl;
         cout << "Usage: tankV1 <controller_hostname> <wlan_interface_name>" << endl;
@@ -23,6 +39,7 @@ int main(int argc, const char** argv) {
     string wlan_interface_name(argv[2]);
 
     MotorController motorController;
+    g_pMotorController = &motorController;
     CameraStreamer capt(controller_host);
     ComClient comClient(controller_host, &motorController, &capt);
 
