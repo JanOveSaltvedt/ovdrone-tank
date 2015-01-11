@@ -22,6 +22,8 @@ public:
     void SetGrayscale(bool grayscale);
     void SetFrameDelay(int ms);
 
+    void Restart();
+
 private:
 	void Capture();
 	void SendFrame(std::vector<uchar> &frame, uint64_t timestamp);

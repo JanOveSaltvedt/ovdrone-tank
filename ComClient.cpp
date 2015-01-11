@@ -75,6 +75,8 @@ void ComClient::runIoService() {
 
             startReadHeader();
 
+            // Reset the camera socket as well
+            m_cameraStreamer->Restart();
             // Restart the io service
             m_ioService.run();
         }

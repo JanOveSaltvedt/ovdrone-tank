@@ -9,7 +9,7 @@ using boost::asio::ip::udp;
 
 CameraStreamer::CameraStreamer(string target_host) 
 : m_remoteHost(target_host), 
-	m_ioService(), 
+    m_ioService(),
     m_socket(m_ioService, udp::endpoint(udp::v4(), 0)), m_quality(50), m_frameDelay(30), m_grayscale(false)
  {
 
@@ -23,6 +23,18 @@ CameraStreamer::CameraStreamer(string target_host)
 }
 
 CameraStreamer::~CameraStreamer() {
+
+}
+
+void CameraStreamer::Restart() {
+    m_socket.close();
+    m_ioService.reset();
+
+    m_socket = std::move(boost::asio::ip::udp::socket(m_ioService, udp::endpoint(udp::v4(), 0)));
+
+    udp::resolver resolver(m_ioService);
+    m_endpoint = *resolver.resolve({udp::v4(), m_remoteHost, "9124"});
+
 
 }
 
