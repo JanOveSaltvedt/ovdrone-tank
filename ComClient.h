@@ -21,6 +21,8 @@ public:
 
     void SendNetworkUpdate(const std::string &ap, int signalLevel, int linkQualityVal, int linkQualityMax);
 
+    void Stop();
+
 private:
 	void runIoService();
 
@@ -36,6 +38,7 @@ private:
     void handleVideoSettings();
 
 private:
+    bool m_run;
 	std::string m_remoteHost;
 	std::thread m_ioThread;
 	boost::asio::io_service m_ioService;

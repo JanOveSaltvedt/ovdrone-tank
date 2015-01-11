@@ -15,6 +15,7 @@ public:
 	~CameraStreamer();
 
 	void Start();
+    void Stop();
 	void Join();
 
     void SetQuality(int quality);
@@ -31,6 +32,8 @@ private:
 	boost::asio::io_service m_ioService;
 	boost::asio::ip::udp::socket m_socket;
 	boost::asio::ip::udp::endpoint m_endpoint;
+
+    bool m_run;
 
     int m_quality;
     int m_frameDelay;

@@ -28,6 +28,7 @@ CameraStreamer::~CameraStreamer() {
 
 void CameraStreamer::Start() {
 	//Capture();
+    m_run = true;
 	
 	m_captureThread = thread(&CameraStreamer::Capture, this);
 }
@@ -71,6 +72,9 @@ void CameraStreamer::SendFrame(vector<uchar> &frame, uint64_t timestamp) {
 
 }
 
+void CameraStreamer::Stop() {
+    m_run = false;
+}
 
 void CameraStreamer::Capture() {
 	using namespace cv;
@@ -96,7 +100,7 @@ void CameraStreamer::Capture() {
 
     //namedWindow("input");
     //namedWindow("output");
-	while(true) {
+    while(m_run) {
         // Get a timestamp
         auto timestamp = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch());
 		cap >> frame;

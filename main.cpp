@@ -18,7 +18,7 @@ void signalHandler( int signum ) {
     g_run = false;
     cout << "Got signal: " << signum << endl;
 
-    exit(signum);
+//    exit(signum);
 }
 
 int main(int argc, const char** argv) {
@@ -73,6 +73,8 @@ int main(int argc, const char** argv) {
         }
     }
 
+    comClient.Stop();
     motorController.set(0.0f, 0.0f);
+    cout << "Exiting cleanly" << endl;
     return 0;
 }

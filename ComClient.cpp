@@ -12,7 +12,7 @@ ComClient::ComClient(string target_host, MotorController* mc, CameraStreamer *cs
 : m_remoteHost(target_host), 
 	m_ioService(), 
     m_socket(m_ioService),
-    m_motorController(mc), m_cameraStreamer(cs)
+    m_motorController(mc), m_cameraStreamer(cs), m_run(true)
  {
  	try {
  		tcp::resolver resolver(m_ioService);
@@ -41,10 +41,49 @@ ComClient::~ComClient() {
 
 }
 
+void ComClient::Stop() {
+    m_run = false;
+    m_socket.close();
+    m_ioService.stop();
+}
+
 void ComClient::runIoService() {
 	cout << "Starting ComClient io service" << endl;
 	m_ioService.run();
-    cout << "The io service for ComClient ran out of work to do." << endl;
+    while(m_run) {
+
+        try {
+            m_ioService.reset();
+            cout << "[ComClient] Lost connection?" << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            cout << "[ComClient] Trying to reconnnect" << endl;
+
+            tcp::resolver resolver(m_ioService);
+            m_endpoint = *resolver.resolve({tcp::v4(), m_remoteHost, "9123"});
+
+            boost::asio::connect(m_socket, resolver.resolve({tcp::v4(), m_remoteHost, "9123"}));
+
+            if(!m_socket.is_open()) {
+                cout << "[ComClient] Could not connect to target host" << endl;
+                continue;
+
+            }
+
+            cout << "[ComClient] Connection to host established" << endl;
+            boost::asio::ip::tcp::no_delay option(true);
+            m_socket.set_option(option);
+
+            startReadHeader();
+
+            // Restart the io service
+            m_ioService.run();
+        }
+        catch (boost::system::system_error &err) {
+            cout << "[ComClient] Exception: " << err.what() << endl;
+        }
+
+
+    }
 }
 
 /*
@@ -60,6 +99,10 @@ void ComClient::SendPing() {
 */
 
 void ComClient::SendMessage(google::protobuf::Message *msg, proto::MessageTypes msgType) {
+    if(!m_socket.is_open()) {
+        m_ioService.stop();
+        return;
+    }
     // Ensure that only one thread is sending at the same time
     std::lock_guard<std::mutex> lock(m_sendMutex);
 
@@ -83,6 +126,8 @@ void ComClient::SendMessage(google::protobuf::Message *msg, proto::MessageTypes 
     }
     catch( boost::system::system_error &err ) {
         cout << "[ComClient] Error in SendMessage: " << err.what() << endl;
+        m_socket.close();
+        m_ioService.stop();
     }
 }
 
@@ -116,7 +161,8 @@ void ComClient::handleReadHeader(const boost::system::error_code &ec) {
         startReadBody(payloadSize);
     }
     else {
-        cout << "Error in handleReadHeader!" << endl;
+        cout << "Error in handleReadHeader!"  << ec.message() << endl;
+        m_socket.close();
         //startReadHeader();
     }
 }
@@ -153,8 +199,8 @@ void ComClient::handleReadBody(const boost::system::error_code &ec) {
         startReadHeader();
     }
     else {
-        cout << "Error in handleReadBody!" << endl;
-        startReadHeader();
+        cout << "Error in handleReadBody!" << ec.message() << endl;
+        m_socket.close();
     }
 }
 
